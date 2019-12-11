@@ -1,1 +1,0 @@
-To start the application unzip the project and run main method in Demo.java class. 
