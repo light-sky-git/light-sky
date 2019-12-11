@@ -1,9 +1,12 @@
 package com.bg.dao;
 
+import com.bg.Configuration;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
@@ -11,16 +14,15 @@ import java.util.Map;
 
 public class CategoryDaoImpl implements CategoryDao {
 
-    public static final String ANIMALS = "ANIMALS";
-    public static final String NUMBERS = "NUMBERS";
-    public static final String CARS = "CARS";
+    private static final String CATEGORIES_CONFIG_PROPERTY_NAME = "conf.categories";
 
     private Map<String, List<String>> dataMap = new HashMap<>();
     private File inputFile;
 
     public CategoryDaoImpl(File inputFile) {
-        dataMap.put(ANIMALS, new ArrayList<>());
-        dataMap.put(NUMBERS, new ArrayList<>());
+        //todo check if config exist
+        List<String> categoriesList = Arrays.asList(Configuration.getConfigurationValue(CATEGORIES_CONFIG_PROPERTY_NAME).split("\\s*,\\s*"));
+        categoriesList.forEach(item -> dataMap.put(item, new ArrayList<>()));
         this.inputFile = inputFile;
     }
 
